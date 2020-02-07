@@ -1,13 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var hbs = require('express-handlebars');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const hbs = require('express-handlebars');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var searchRoutes = require('./routes/search_routes');
+// These are neat! Using helpers to persist state data in search form and format date in result.
+const helpers = require('handlebars-helpers');
+const compare_helpers = helpers.comparison();
+const date_helpers = helpers.date();
 
-var app = express();
+const searchRoutes = require('./routes/search_routes');
+
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,7 +24,11 @@ app.engine('hbs', hbs({
   partialsDir: [
     path.join( __dirname + '/views/partials/'),
     path.join( __dirname + '/views/partials/results/')
-  ]
+  ],
+  helpers: {
+    ...compare_helpers,
+    ...date_helpers
+  }
 }))
 
 app.set('view engine', 'hbs');

@@ -2,6 +2,6 @@
 <select id={{id}} name={{name}} >
   <option></option>
   {{#each elements}}
-    <option value="{{this}}">{{this}}</option>
+    <option value="{{this}}" {{#eq ../selected this}} selected {{/eq}}>{{this}}</option>
   {{/each}}
 </select>
