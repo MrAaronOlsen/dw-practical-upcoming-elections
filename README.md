@@ -9,7 +9,8 @@ Built using the JavaScript template.
 
 ## Running
 
-  `npm start`
+  `npm start`<br>
+  You can get to home page at http://localhost:3000/
 
 ## Testing
 
