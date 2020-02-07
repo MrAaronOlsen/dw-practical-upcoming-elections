@@ -1,0 +1,19 @@
+<div class="address-form">
+  <form action="/search" method="post">
+    <p>Enter the address where you are registered to vote</p>
+    <div>
+      {{> input id="street-field" label="Street" name="street" value=street }}
+    </div>
+    <div>
+      {{> input id="street-2-field" label="Street 2" name="street-2" value=street-2 }}
+    </div>
+    <div>
+      {{> input id="city-field" label="City" name="city" value=city }}
+      {{> select id="state-field" label="State" name="state" elements=states }}
+      {{> input id="zip-field" label="Zip" name="zip" size=10 value=zip }}
+    </div>
+    <div class="button">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+</div>
