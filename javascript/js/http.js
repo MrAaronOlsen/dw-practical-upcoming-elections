@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 
+// I borrowed this from a personal project. Has worked ok for me so far...
 const get = (url, headers, callback) => {
   fetch(url, { method: 'GET', headers: headers})
   .then((res) => {

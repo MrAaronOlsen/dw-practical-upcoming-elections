@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { processIndexGet } = require('../controllers/search_controller.js')
+const { processIndexGet, processSearchSubmit } = require('../controllers/search_controller.js')
 
 /* GET search page. */
 router.get('/', (req, res) => {
@@ -9,5 +9,12 @@ router.get('/', (req, res) => {
     res.render('search_view', data);
   })
 });
+
+router.post('/search', (req, res) => {
+
+  processSearchSubmit(req.body, (data) => {
+    res.render('search_view', data);
+  });
+})
 
 module.exports = router;
