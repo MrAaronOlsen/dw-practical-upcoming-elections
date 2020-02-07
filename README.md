@@ -1,19 +1,16 @@
-# Upcoming Elections Practical
+# Aaron Olsen Submission for Software Developer position at Democracy Works
 
-This is a server-side web application written in JavaScript with
-[Express][express] and [Handlebars][handlebars].
+Built from the JavaScript template.
 
 ## Setup
+  I removed node_modules from the zip. So another install will be needed.
 
-    npm install
+  `npm install`
 
 ## Running
 
-    DEBUG=js-upcoming-elections:* npm start
+  `npm start`
 
 ## Testing
 
-    npm test
-
-[express]: https://expressjs.com/
-[handlebars]: http://handlebarsjs.com/
+  `npm test`
