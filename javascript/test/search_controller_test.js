@@ -16,6 +16,11 @@ processIndexGet(data => {
   tap.ok(data.title, "Index data should include a title.");
 })
 
+// Mocking empty express-validator errors.
+const errorsEmpty = {
+  isEmpty: () => true
+}
+
 /*
   Test that a valid call to the search API returns a reliable payload.
 */
@@ -26,7 +31,7 @@ const body = {
   "city": "Denver"
 }
 
-processSearchSubmit(body, (data) => {
+processSearchSubmit(body, errorsEmpty, (data) => {
   tap.ok(data, "Data should be truthy.");
   tap.type(data, Object, "Data should be Object.")
 
@@ -48,7 +53,7 @@ const bodyInvalid = {
   "city": "Denver"
 }
 
-processSearchSubmit(bodyInvalid, (data) => {
+processSearchSubmit(bodyInvalid, errorsEmpty, (data) => {
   tap.ok(data, "Data should be truthy.");
   tap.type(data, Object, "Data should be Object.")
 
@@ -58,12 +63,28 @@ processSearchSubmit(bodyInvalid, (data) => {
 
   const error = data.errors[0];
   tap.ok(error, "First error should be truthy.");
-  tap.type(error, Object, "First error should be Object.")
+  tap.type(error, 'string', "First error should be String.");
+})
 
-  const errorMessage = error.error;
+/*
+  Test that validation errors are processed correctly and passed back in a reliably form.
+*/
 
-  tap.ok(errorMessage, "First error should have an error message.");
-  tap.type(errorMessage, Object, "First error message should be an Object.");
-  tap.ok(errorMessage.type, "First object should have a type.");
-  tap.equals(errorMessage.type, "validation", "First object type should say 'validation'.");
+// Mocking express-validator errors object for sad path
+const errorsBad = {
+  isEmpty: () => false,
+  errors: [
+    {
+      "param": "state",
+    }
+  ]
+}
+
+processSearchSubmit(body, errorsBad, (data) => {
+  tap.ok(data, "Data should be truthy.");
+  tap.type(data, Object, "Data should be Object.")
+
+  tap.notOk(data.results, "Data should not have any results.");
+
+  tap.ok(data["state_error"], "Data should have a 'state_error' key");
 })

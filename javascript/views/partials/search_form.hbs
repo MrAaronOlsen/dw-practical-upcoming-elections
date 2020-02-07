@@ -8,12 +8,14 @@
       {{> input id="street-2-field" label="Street 2" name="street-2" value=street-2 }}
     </div>
     <div>
-      {{> input id="city-field" label="City" name="city" value=city }}
-      {{> select id="state-field" label="State" name="state" selected=state elements=states }}
+      {{> input id="city-field" label="City" name="city" value=city error=city_error }}
+      {{> select id="state-field" label="State" name="state" selected=state elements=states error=state_error }}
       {{> input id="zip-field" label="Zip" name="zip" size=10 value=zip }}
     </div>
     <div class="button">
       <button type="submit">Search</button>
     </div>
+    <!-- If the request is invalid errors will display here. -->
+    {{> errors this}}
   </form>
 </div>

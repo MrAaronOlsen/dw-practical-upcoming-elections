@@ -1,5 +1,5 @@
 <label for={{id}}>{{label}}:</label>
-<select id={{id}} name={{name}} >
+<select id={{id}} name={{name}} class={{#if error}} "field-error" {{/if}}>
   <option></option>
   {{#each elements}}
     <option value="{{this}}" {{#eq ../selected this}} selected {{/eq}}>{{this}}</option>
